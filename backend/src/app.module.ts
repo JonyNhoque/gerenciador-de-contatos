@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ContatosModule } from './contatos/contatos.module';
 import { AuthModule } from './auth/auth.module';
+
 @Module({
   imports: [
     ContatosModule,
