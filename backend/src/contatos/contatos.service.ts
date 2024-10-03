@@ -1,21 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Contato } from './contato.model';
+import { CreateContatoDto } from './dto/criar-contato.dto';
+import { ContatoDocument } from './schemas/contato.schema';
 
 @Injectable()
 export class ContatosService {
   constructor(
     @InjectModel('Contato') 
-    private readonly contatoModel: Model<Contato>
+    private readonly contatoModel: Model<ContatoDocument>
   ){}
 
-  async create(nome: string, endereco: string, telefone: string, email: string): Promise<Contato> {
-    const contatoCriado = new this.contatoModel({ nome, endereco, telefone, email });
+  async create(createContatoDto: CreateContatoDto): Promise<ContatoDocument> {
+    const contatoCriado = new this.contatoModel(createContatoDto);
     return await contatoCriado.save();
   };
 
-  async findAll(): Promise<Contato[]> {
+  async findAll(): Promise<ContatoDocument[]> {
     return await this.contatoModel.find().exec();
   }
 }

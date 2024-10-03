@@ -6,6 +6,7 @@ import {
   Param
 } from '@nestjs/common';
 import { ContatosService } from './contatos.service';
+import { CreateContatoDto } from './dto/criar-contato.dto';
 
 @Controller('contatos')
 export class ContatosController {
@@ -15,15 +16,9 @@ export class ContatosController {
 
   @Post()
   async create( 
-    @Body('nome') nome, 
-    @Body('endereco') endereco,
-    @Body('telefone') telefone,
-    @Body('email') email
+    @Body() createContatoDto: CreateContatoDto
   ){
-    const id = await this.contatosService.create(
-      nome, endereco, telefone, email
-    );
-
+    const id = await this.contatosService.create(createContatoDto);
     return {id: id}
   };
 
