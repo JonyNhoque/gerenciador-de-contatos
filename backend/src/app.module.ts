@@ -2,8 +2,13 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
+import { MongooseModule } from '@nestjs/mongoose';
+import { ContatosModule } from './contatos/contatos.module';
 @Module({
-  imports: [],
+  imports: [
+    ContatosModule,
+    MongooseModule.forRoot(process.env.MONGODB_URI)
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
