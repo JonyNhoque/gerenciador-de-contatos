@@ -10,17 +10,15 @@
           <div class="card-body">
             <h3 class="text-center mb-4">Login</h3>
 
-            <form @submit.prevent="login">
-              <div class="mb-3">
+            <form @submit.prevent="login" class="d-flex flex-column align-items-center">
+              <div class="mb-3 d-flex flex-column align-items-center">
                 <label for="username" class="form-label">Usuário</label>
-                <InputText v-model="username" id="username" placeholder="Digite seu nome de usuário" class="form-control"/>
-              </div>
-
-              <div class="mb-3">
+                <InputText v-model="username" id="username" placeholder="Digite seu nome de usuário" class="form-control mb-3" style="max-width: 244px;"/>
+                
                 <label for="password" class="form-label">Senha</label>
-                <Password v-model="password" id="password" placeholder="Digite sua senha" class="form-control border-0"/>
+                <Password v-model="password" id="password" placeholder="Digite sua senha" class="form-control border-0 px-0"/>
               </div>
-
+                
               <div class="d-grid gap-2">
                 <Button label="Entrar" class="p-button p-button-primary" type="submit" />
               </div>
