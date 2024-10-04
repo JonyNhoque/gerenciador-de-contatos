@@ -43,6 +43,7 @@ import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
+import { useRouter } from 'vue-router';
 
 export default {
   name: 'AuthView',
@@ -52,11 +53,13 @@ export default {
     Button,
     Dialog
   },
-  setup(props, { emit }) {
+  setup() {
     const username = ref('');
     const password = ref('');
     const openDialog = ref(false);
     const msgDialog = ref('');
+
+    const router = useRouter();
 
     const login = async () => {
       try {
@@ -65,8 +68,9 @@ export default {
           password: password.value
         });
         if (response.data) {
-          openDialog.value = true;
-          msgDialog.value = 'Autenticação bem sucedida.';
+          /* openDialog.value = true;
+          msgDialog.value = 'Autenticação bem sucedida.'; */
+          router.push('/contatos');
         } else {
           openDialog.value = true;
           msgDialog.value = 'Usuário não encontrado ou credenciais inválidas';
@@ -77,7 +81,7 @@ export default {
     };
 
     const goToRegister = () => {
-      emit('register');
+      router.push('/register');
     };
 
     return {
@@ -85,6 +89,7 @@ export default {
       password,
       openDialog,
       msgDialog,
+      router,
       login,
       goToRegister
     };

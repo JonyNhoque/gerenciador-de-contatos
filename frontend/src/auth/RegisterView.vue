@@ -43,6 +43,7 @@ import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
+import { useRouter } from 'vue-router';
 
 export default {
   name: 'RegisterView',
@@ -52,11 +53,13 @@ export default {
     Button,
     Dialog
   },
-  setup(props, { emit }) {
+  setup() {
     const username = ref('');
     const password = ref('');
     const openDialog = ref(false);
     const msgDialog = ref('');
+
+    const router = useRouter();
 
     const register = async () => {
       try {
@@ -77,7 +80,7 @@ export default {
     };
 
     const goToLogin = () => {
-      emit('goToLogin');
+      router.push('/')
     };
 
     return {
@@ -85,6 +88,7 @@ export default {
       password,
       openDialog,
       msgDialog,
+      router,
       register,
       goToLogin
     };
