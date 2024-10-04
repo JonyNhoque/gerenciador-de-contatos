@@ -4,6 +4,7 @@ import router from "./router";
 
 import PrimeVue from 'primevue/config';
 import Aura from '@primevue/themes/aura';
+import './style.scss';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
