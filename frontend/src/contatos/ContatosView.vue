@@ -20,12 +20,12 @@
               <Button 
                 icon="pi pi-pencil" 
                 class="me-2"
-                @click="editContato(slotProps.data)"
+                @click="editarContato(slotProps.data)"
                 aria-label="Editar"
               />
               <Button 
                 icon="pi pi-trash" 
-                @click="deleteContato(slotProps.data._id)"
+                @click="deletarContato(slotProps.data._id)"
                 aria-label="Excluir"
               />
             </template>
@@ -66,21 +66,37 @@ export default {
     async function getContatos(){
       try {
         const response = await axios.get('http://localhost:3000/contatos')
+        console.log(response.data)
         return contatos.value = response.data;
       } catch(error) {
         console.error(error)
       }
     }
 
-    async function cadastrarUsuario(){
+    async function cadastrarContato(){
       return
+    }
+
+    async function editarContato(){
+      return
+    }
+
+    async function deletarContato(id){
+      try {
+        const response = await axios.delete(`http://localhost:3000/contatos/${id}`)
+        return contatos.value = response.data;
+      } catch(error) {
+        console.error(error)
+      }
     }
     
     return {
       contatos,
       contatoSelecionado,
       getContatos,
-      cadastrarUsuario
+      cadastrarContato,
+      editarContato,
+      deletarContato
     }
   }
 }
