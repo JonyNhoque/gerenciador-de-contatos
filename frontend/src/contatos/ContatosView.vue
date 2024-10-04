@@ -20,7 +20,7 @@
               <Button 
                 icon="pi pi-pencil" 
                 class="me-2"
-                @click="editarContato(slotProps.data)"
+                @click="editarContato(slotProps.data._id)"
                 aria-label="Editar"
               />
               <Button 
@@ -33,7 +33,7 @@
         </DataTable>
 
         <div class="d-flex justify-content-start mt-3">
-          <Button label="Cadastrar contato" class="p-button p-button-primary" v-on:click="cadastrarUsuario()" />
+          <Button label="Cadastrar contato" class="p-button p-button-primary" v-on:click="cadastrarContato()" />
         </div>
       </div>
     </div>
@@ -48,6 +48,7 @@ import { ref } from 'vue';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Button from 'primevue/button';
+import router from '@/router';
 
 export default {
   name: 'ContatosView',
@@ -66,7 +67,6 @@ export default {
     async function getContatos(){
       try {
         const response = await axios.get('http://localhost:3000/contatos')
-        console.log(response.data)
         return contatos.value = response.data;
       } catch(error) {
         console.error(error)
@@ -74,11 +74,11 @@ export default {
     }
 
     async function cadastrarContato(){
-      return
+      return router.push('contatos/edit')
     }
 
-    async function editarContato(){
-      return
+    async function editarContato(id){
+      return router.push(`contatos/${id}/edit`)
     }
 
     async function deletarContato(id){
