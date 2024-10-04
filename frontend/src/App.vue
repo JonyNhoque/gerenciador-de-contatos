@@ -1,25 +1,34 @@
 <template>
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <component :is="currentView" @register="showRegisterView" @goToLogin="showLoginView"/>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AuthView from './auth/AuthView';
+import RegisterView from './auth/RegisterView';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    AuthView,
+    RegisterView
+  },
+  data() {
+    return {
+      currentView: 'AuthView',
+    };
+  },
+  methods: {
+    showRegisterView() {
+      this.currentView = 'RegisterView';
+    },
+    showLoginView() {
+      this.currentView = 'AuthView';
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
