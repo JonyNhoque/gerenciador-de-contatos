@@ -20,9 +20,15 @@ export class AuthService {
   }
 
   async login(loginDto: LoginDto): Promise<Usuario | null> {
+    console.log('Login => ', loginDto);
     const user = await this.userModel.findOne({ username: loginDto.username });
-    if (user && (await bcrypt.compare(loginDto.password, user.password))) {
-      return user;
+    if (!user) {
+        console.log('Usuário não encontrado');
+        return null;  
+    }
+    const isPasswordValid = await bcrypt.compare(loginDto.password, user.password);
+    if (isPasswordValid) {
+        return user;
     }
     return null;
   }
